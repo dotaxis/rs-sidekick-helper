@@ -29,8 +29,6 @@ serde_json = "1"
 base64 = "0.22.1"
 clipboard = "0.5.0"
 tauri-plugin-shell = "2"
-signal-hook = "0.3.17"
-nix = "0.29.0"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-global-shortcut = "2"
