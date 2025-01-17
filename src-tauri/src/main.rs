@@ -102,7 +102,7 @@ pub fn search_for_item(window: &WebviewWindow) {
     let mut clipboard: ClipboardContext = ClipboardProvider::new().unwrap();
 
     // Store the original clipboard content
-    let original_clip = clipboard.get_contents().unwrap();
+    let original_clip = clipboard.get_contents().ok().unwrap_or_default();
 
     // Simulate pressing Ctrl + C in the game window using xdotool
     Command::new("xdotool")
