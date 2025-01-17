@@ -74,15 +74,6 @@ fn main() -> Result<(), Box<dyn Error>>  {
         })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-        // .run(move |app, event| {
-        //     if let tauri::RunEvent::ExitRequested { api, .. } = event {
-        //         // kill_sidekick(Arc::clone(&sidekick_handle));
-        //         for (_label, window) in app.webview_windows() {
-        //             window.close().unwrap();
-        //         }
-        //     }
-        // });
-
     Ok(())
 }
 
