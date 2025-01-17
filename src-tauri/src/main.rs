@@ -14,7 +14,6 @@ fn main() -> Result<(), Box<dyn Error>>  {
         .spawn()
         .expect("failed to run sidekick");
 
-    let dotnet_pid = dotnet.id().to_string();
     let dotnet_handle = Arc::new(Mutex::new(dotnet));
 
     tauri::Builder::default()
