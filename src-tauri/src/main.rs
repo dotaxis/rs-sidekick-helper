@@ -1,17 +1,19 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use clipboard::{ClipboardContext, ClipboardProvider};
-use std::{error::Error, process::{Child, Command}, sync::{Arc, Mutex}, thread, time};
+use std::{env, error::Error, path::Path, process::{Child, Command}, sync::{Arc, Mutex}, thread, time};
 use tauri::{image::Image, menu::{MenuBuilder, MenuItemBuilder}, tray::TrayIconBuilder, Manager, WebviewWindow};
 
-// Exec=/usr/bin/dotnet /home/dot/projects/PoE-Sidekick/src/Sidekick.Web/bin/Debug/net8.0/Sidekick.dll
-
 fn main() -> Result<(), Box<dyn Error>>  {
+    let sidekick_dir = env::var("SIDEKICK_DIR")?;
+    let dll_path = Path::new(&sidekick_dir).join("src/Sidekick.Web/bin/Debug/net8.0/Sidekick.dll");
+
     let dotnet = Command::new("dotnet")
-        .args(["/home/dot/projects/PoE-Sidekick/src/Sidekick.Web/bin/Debug/net8.0/Sidekick.dll"])
-        .current_dir("/home/dot/projects/PoE-Sidekick/src/Sidekick.Web")
+        .arg(dll_path)
+        .current_dir(Path::new(&sidekick_dir).join("src/Sidekick.Web"))
         .spawn()
         .expect("failed to run sidekick");
+
     let dotnet_pid = dotnet.id().to_string();
     let dotnet_handle = Arc::new(Mutex::new(dotnet));
 
