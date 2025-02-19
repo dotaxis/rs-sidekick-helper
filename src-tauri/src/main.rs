@@ -39,7 +39,7 @@ fn main() -> Result<(), Box<dyn Error>>  {
 
             let _tray = TrayIconBuilder::new()
                 .icon(Image::from_path(
-                    "/home/dot/projects/rust-projects/sidekick-helper/src-tauri/icons/icon.png",
+                    Path::new(env!("CARGO_MANIFEST_DIR")).join("icons/icon.png"),
                 )?)
                 .menu(&menu)
                 .on_menu_event(|app, event| if event.id().as_ref() == "quit" {
