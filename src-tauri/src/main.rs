@@ -31,7 +31,7 @@ fn main() -> Result<(), Box<dyn Error>>  {
             let window = app.handle().get_webview_window("main").unwrap();
             window.eval("window.location.replace('http://localhost:5000/initialize')").expect("failed to set window location");
             window.hide().expect("failed to hide window");
-            
+
             let menu = MenuBuilder::new(app)
                 .items(&[&quit])
                 .build()
