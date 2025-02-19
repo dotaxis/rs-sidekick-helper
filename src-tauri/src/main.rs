@@ -31,7 +31,7 @@ fn main() -> Result<(), Box<dyn Error>>  {
             let window = app.handle().get_webview_window("main").unwrap();
             window.eval("window.location.replace('http://localhost:5000/initialize')").expect("failed to set window location");
             window.hide().expect("failed to hide window");
-            
+
             let menu = MenuBuilder::new(app)
                 .items(&[&quit])
                 .build()
@@ -39,7 +39,7 @@ fn main() -> Result<(), Box<dyn Error>>  {
 
             let _tray = TrayIconBuilder::new()
                 .icon(Image::from_path(
-                    "/home/dot/projects/rust-projects/sidekick-helper/src-tauri/icons/icon.png",
+                    Path::new(env!("CARGO_MANIFEST_DIR")).join("icons/icon.png"),
                 )?)
                 .menu(&menu)
                 .on_menu_event(|app, event| if event.id().as_ref() == "quit" {
